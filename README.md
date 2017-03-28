@@ -8,7 +8,7 @@
 + Rafael Dias Silveira - 14/0030433
 
 ## Projeto
- (editar) um sistema para conectar empresas e pessoas na busca de emprego
+ (editar) Um sistema para conectar empresas e pessoas na busca de emprego. Neste sistema, o usuário deve ser capaz de se cadastrar e de logar no sistema para fazer buscas. Uma pessoa física pode... Uma empresa pode...
  
 ## Arquitetura do Projeto e Justificativa
-(editar) a liguagem escolhida foi BIRL porque ....
+(editar) A liguagem escolhida foi Python porque .... O framework escolhido foi Django porque...
