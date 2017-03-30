@@ -2,4 +2,5 @@
 /lib
 /local
 /share
+source/**/*.pyc
 pip-selfcheck.json
