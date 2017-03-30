@@ -4,3 +4,4 @@
 /share
 source/**/*.pyc
 pip-selfcheck.json
+.idea
