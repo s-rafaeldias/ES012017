@@ -2,6 +2,6 @@
 /lib
 /local
 /share
-source/**/*.pyc
+*.pyc
 pip-selfcheck.json
 .idea
