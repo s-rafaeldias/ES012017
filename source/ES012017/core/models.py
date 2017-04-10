@@ -21,3 +21,8 @@ class Emprego(models.Model):
     # area_formacao
     # conhecimentos_exigidos
 
+    def __str__(self):
+        return self.nome
+
+    def __unicode__(self):
+        return self.nome

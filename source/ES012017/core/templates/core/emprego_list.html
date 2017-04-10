@@ -1,0 +1,7 @@
+<h1>Empregos</h1>
+
+{% for emprego in lista_empregos %}
+    <li>{{ emprego.nome }}</li><br>
+{% empty %}
+    <h2>Vazio</h2>
+{% endfor %}
