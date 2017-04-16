@@ -17,4 +17,5 @@ def criar_emprego():
 
     return emprego
 
-class EmpregoViewTest(TestCase):
+
+#class EmpregoViewTest(TestCase):
