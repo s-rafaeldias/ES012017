@@ -75,16 +75,11 @@ WSGI_APPLICATION = 'ES012017.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'es012017',
-#        'USER': 'es012017',
-#        'PASSWORD': 'senhatop',
-#        'HOST': 'localhost',
-#        'PORT': '5433',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    }
+}
 
 
 # Password validation
@@ -143,7 +138,7 @@ try:
 except ImportError:
    pass
 
-#Update database configuration with $DATABASE_URL.
+# Update database configuration with $DATABASE_URL.
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
