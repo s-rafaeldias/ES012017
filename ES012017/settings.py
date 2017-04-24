@@ -75,11 +75,16 @@ WSGI_APPLICATION = 'ES012017.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'es012017',
+#        'USER': 'es012017',
+#        'PASSWORD': 'senhatop',
+#        'HOST': 'localhost',
+#        'PORT': '5433',
+#    }
+#}
 
 
 # Password validation
@@ -100,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'core.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -120,7 +126,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '../'
 # Heroku Settings
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
@@ -132,11 +139,11 @@ ALLOWED_HOSTS = ['*']
 DEBUG = False
 
 try:
-    from .local_settings import *
+   from .local_settings import *
 except ImportError:
-    pass
+   pass
 
-# Update database configuration with $DATABASE_URL.
+#Update database configuration with $DATABASE_URL.
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)

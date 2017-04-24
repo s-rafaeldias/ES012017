@@ -1,16 +1,18 @@
-from django.shortcuts import render
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.views import generic
-
 from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-
+from django.shortcuts import redirect, render
+from .forms import RegistrationForm, EditRegistrationForm
+from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from models import Emprego
+from models import Emprego, User
 
 
 class IndexView(generic.ListView):
@@ -18,7 +20,7 @@ class IndexView(generic.ListView):
     context_object_name = {}
 
     def get_queryset(self):
-        return #vai retornar algum objeto para ser usado
+        return #vai retornar algum objeto para ser listado caso precise
 
 # Views da Model Emprego
 class EmpregoCreate(CreateView):
@@ -58,7 +60,7 @@ class EmpregoDelete(DeleteView):
 
 class EmpregoDetailView(DetailView):
   model = Emprego
-  template_name = 'core/emprego_detail.html'
+  template_name = 'core/Emprego/emprego_detail.html'
 
   def get_context_data(self, **kwargs):
     context = super(EmpregoDetailView, self).get_context_data(**kwargs)
@@ -67,10 +69,67 @@ class EmpregoDetailView(DetailView):
 class EmpregoListView(ListView):
   model = Emprego
   context_object_name = 'lista_empregos'
-  template_name = 'core/emprego_list.html'
+  template_name = 'core/Emprego/emprego_list.html'
 
   def get_queryset(self):
     return Emprego.objects.all()
 
 
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        form = RegistrationForm()
+        args = {'form': form}
+        return render(request, 'core/Usuario/register.html', args)
 
+
+def view_profile(request):
+    args = {'user': request.user}
+    user = request.user
+    if user.is_anonymous:
+        return redirect('/login')
+    else:
+        return render(request, 'core/Usuario/perfil.html', args)
+
+
+def edit_profile(request):
+    user = request.user
+    if user.is_anonymous:
+        return redirect('/login')
+    else:
+        if request.method == 'POST':
+            form = EditRegistrationForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('/perfil')
+        else:
+            form = EditRegistrationForm(instance=request.user)
+            args = {'form': form}
+            return render(request, 'core/Usuario/edit_profile.html', args)
+
+
+def change_password(request):
+    user = request.user
+    if user.is_anonymous:
+        return redirect('/login')
+    else:
+        if request.method == 'POST':
+            form = PasswordChangeForm(data=request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+                return redirect('/perfil')
+            else:
+                return redirect('/editSenha')
+        else:
+            form = PasswordChangeForm(user=request.user)
+            args = {'form': form}
+            return render(request, 'core/Usuario/change_password.html', args)

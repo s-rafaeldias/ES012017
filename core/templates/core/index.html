@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ES12017</title>
-</head>
-<body>
-    <h1 style= "color: hotpink">Tá saindo da jaula o monstro!</h1>
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% block content %}
+   <h2>Tá saindo da jaula o {{ user }}</h2>
+    {% if user.is_authenticated %}
+        <br>
+        <a href="{% url 'perfil' %}" class="btn btn-default btn-lg">Perfil</a>
+    {% endif %}
+
+{% endblock %}
