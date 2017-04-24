@@ -25,6 +25,7 @@ class IndexView(generic.ListView):
 # Views da Model Emprego
 class EmpregoCreate(CreateView):
   model  = Emprego
+  template_name = 'core/Emprego/emprego_form.html'
   fields = ['nome',
             'descricao',
             'empresa',
