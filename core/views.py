@@ -75,10 +75,10 @@ def EmpregoListView(request):
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
-        Q(nome__contains = query)|
-        Q(descricao__contains=query)|
-        Q(empresa__contains=query)|
-        Q(area_atuacao__contains=query) |
+        Q(nome__search = query)|
+        Q(descricao__search=query)|
+        Q(empresa__search=query)|
+        Q(area_atuacao__search=query) |
         Q(salario__contains=query)
         ).distinct()
 
