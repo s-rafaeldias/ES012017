@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, update_session_auth_hash
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request, HttpRequest
+
 
 # Create your views here.
 from django.views import generic
@@ -67,13 +68,17 @@ class EmpregoDetailView(DetailView):
     context = super(EmpregoDetailView, self).get_context_data(**kwargs)
     return context
 
-class EmpregoListView(ListView):
-  model = Emprego
-  context_object_name = 'lista_empregos'
-  template_name = 'core/Emprego/emprego_list.html'
 
-  def get_queryset(self):
-    return Emprego.objects.all()
+def EmpregoListView(request):
+    queryset_list = Emprego.objects.all()
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(nome__contains = query)
+
+    context = {
+        "emprego": queryset_list
+    }
+    return render(request, "core/Emprego/emprego_list.html", context)
 
 
 def register(request):

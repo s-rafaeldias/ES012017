@@ -1,5 +1,8 @@
 <h1>Lista de Empregos</h1>
-
+<form method="get" action="">
+    <input type="text" name="q" placeholder="Pesquisar emprego" value="{{ request.GET.q }}">
+    <button class="btn btn-default btn-lg" type="submit">Pesquisar</button>
+</form>
 
 <table>
 	<thead>
@@ -13,7 +16,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for emprego in lista_empregos %}
+		{% for emprego in emprego %}
 		<tr> 
 			<td>{{emprego.nome}}</td>
 			<td>{{emprego.descricao}}</td>

@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^editEmprego/(?P<pk>\d+)/$', views.EmpregoUpdate.as_view(), name='emprego-update'),
     url(r'^deleteEmprego/(?P<pk>\d+)/$', views.EmpregoDelete.as_view(), name='emprego-delete'),
     url(r'^viewEmprego/(?P<pk>\d+)/$', views.EmpregoDetailView.as_view(), name='emprego-detail'),
-    url(r'^listEmprego/$', views.EmpregoListView.as_view(), name='emprego-list'),
+    url(r'^listEmprego/$', views.EmpregoListView, name='emprego-list'),
 
     # Urls Usuario
     url(r'^registrar/$', views.register, name='registrar'),
