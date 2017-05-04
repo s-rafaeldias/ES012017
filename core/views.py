@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.http import HttpResponseRedirect, request, HttpRequest
+from django.db.models import Q
 
 
 # Create your views here.
@@ -73,7 +74,13 @@ def EmpregoListView(request):
     queryset_list = Emprego.objects.all()
     query = request.GET.get("q")
     if query:
-        queryset_list = queryset_list.filter(nome__contains = query)
+        queryset_list = queryset_list.filter(
+        Q(nome__contains = query)|
+        Q(descricao__contains=query)|
+        Q(empresa__contains=query)|
+        Q(area_atuacao__contains=query) |
+        Q(salario__contains=query)
+        ).distinct()
 
     context = {
         "emprego": queryset_list
