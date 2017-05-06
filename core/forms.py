@@ -28,44 +28,16 @@ class RegistrationForm(UserCreationForm):
                   'email',
                   'password1',
                   'password2',
-                  'descricao',
                   'cpf',
                   'cnpj',
                   'genero',
                   'perfil',
                   'telefone',
-                  'endereco']
+                  'endereco',
+                  'descricao']
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']
-
-        if commit:
-            user.save()
-
-        return user
-
-
-class EditRegistrationForm(UserChangeForm):
-    class Meta:
-        model = User
-        fields = ['username',
-                  'first_name',
-                  'last_name',
-                  'email',
-                  'password',
-                  'descricao',
-                  'cpf',
-                  'cnpj',
-                  'genero',
-                  'perfil',
-                  'telefone',
-                  'endereco']
-
-    def save(self, commit=True):
-        user = super(EditRegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']

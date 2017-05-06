@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, update_session_auth_hash
-from django.http import HttpResponseRedirect, request, HttpRequest
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.db.models import Q
 
 
@@ -9,9 +10,8 @@ from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
 from django.shortcuts import redirect, render
-from .forms import RegistrationForm, EditRegistrationForm
+from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
 from models import Emprego, User
@@ -113,20 +113,25 @@ def view_profile(request):
         return render(request, 'core/Usuario/perfil.html', args)
 
 
-def edit_profile(request):
-    user = request.user
-    if user.is_anonymous:
-        return redirect('/login')
-    else:
-        if request.method == 'POST':
-            form = EditRegistrationForm(request.POST, instance=request.user)
-            if form.is_valid():
-                form.save()
-                return redirect('/perfil')
-        else:
-            form = EditRegistrationForm(instance=request.user)
-            args = {'form': form}
-            return render(request, 'core/Usuario/edit_profile.html', args)
+class UserUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+    template_name = 'core/Usuario/edit_profile.html'
+    model = User
+    fields = ['username',
+                  'first_name',
+                  'last_name',
+                  'email',
+                  'cpf',
+                  'cnpj',
+                  'genero',
+                  'perfil',
+                  'telefone',
+                  'endereco',
+                  'descricao']
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def change_password(request):

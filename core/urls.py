@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^login/$', login,{'template_name': 'core/Usuario/login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^perfil/$', views.view_profile, name='perfil'),
-    url(r'^editPerfil/$', views.edit_profile, name='perfil-editar'),
-    url(r'^editSenha/$', views.change_password, name='senha-editar')
+    url(r'^editPerfil/$', views.UserUpdate.as_view(success_url='/perfil'), name='perfil-editar'),
+    url(r'^editSenha/$', views.change_password, name='senha-editar'),
 
 ]
