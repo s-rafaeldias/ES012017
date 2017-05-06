@@ -1,15 +1,14 @@
 {% extends 'core/base.html' %}
-{% block head %}
-    <h1>Registrar</h1>
-{% endblock head %}
 
 {% block content %}
 <div class="container">
+    <h1>Registrar</h1>
+    <br>
     <form method="post">
         {% csrf_token %}
         {% include 'core/Usuario/form_template.html' %}
         <br>
-        <button class="btn btn-default btn-lg" type="submit">Registrar</button>
+        <button class="btn btn-success" type="submit">Registrar</button>
     </form>
 </div>
 {% endblock %}

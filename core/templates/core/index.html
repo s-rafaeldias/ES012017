@@ -3,11 +3,8 @@
 {% block content %}
     <div class="container">
 
-        <h2>Tá saindo da jaula o {{ user }}</h2>
-        {% if user.is_authenticated %}
-            <br>
-            <a href="{% url 'perfil' %}" class="btn btn-default btn-lg">Perfil</a>
-        {% endif %}
+        <h2 class="text-center">Bem vindo ao Work4holics {{ user }}! </h2>
+        <h3>Procure uma oferta de emprego agora!!</h3>
 
     </div>
 

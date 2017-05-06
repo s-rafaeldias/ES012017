@@ -10,7 +10,15 @@
 		    <h1 class="form-signin-heading">Login</h1>
 			  <hr class="colorgraph"><br>
                 <div >
-                    {% include 'core/Usuario/form_template.html' %}
+                    {% for field in form %}
+                        <div>
+                            <label>{{ field.label_tag }}</label>
+                            <div>{{ field }}</div>
+                            <div>
+                                <span>{{ field.errors }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
                     <br>
 			        <button class="btn btn-default btn-lg"  name="Submit" value="Login" type="Submit">Entrar</button>
 			    </div>

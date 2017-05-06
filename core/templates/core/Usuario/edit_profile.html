@@ -1,10 +1,9 @@
 {% extends 'core/base.html' %}
-{% block head %}
-    <h1>Perfil</h1>
-{% endblock head %}
 
 {% block content %}
     <div class="container">
+        <h1>Editar Perfil</h1>
+        <br>
         <form method="post">
             {% csrf_token %}
             {% include 'core/Usuario/form_template.html' %}
