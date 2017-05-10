@@ -1,14 +1,26 @@
-<h1>Emprego</h1>
+{% extends 'core/base.html' %}
 
-<table>
-	<thead>
-		<tr>
-			<th>Nome</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>{{object.nome}}</td>
-		</tr>
-	</tbody>
-</table>
+{% block content %}
+    <h1>Inscrever Perfil</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ emprego.nome }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% if not inscrito %}
+
+    <a class="btn-default" href="{% url 'signin-emprego' signin=emprego.id %}" title="Inscrever">
+        Inscrever
+    </a>
+
+    {% endif %}
+
+{% endblock %}

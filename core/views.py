@@ -67,6 +67,7 @@ class EmpregoDetailView(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super(EmpregoDetailView, self).get_context_data(**kwargs)
+    context['inscrito'] = User.objects.filter(empregos__id=kwargs['object'].id).count()
     return context
 
 
@@ -151,3 +152,19 @@ def change_password(request):
             form = PasswordChangeForm(user=request.user)
             args = {'form': form}
             return render(request, 'core/Usuario/change_password.html', args)
+
+def signinEmprego(request, signin):
+    user = request.user
+
+    if user.is_anonymous:
+        return redirect('/login')
+    else:
+        userdb = User.objects.get(pk=user.id)
+        empregodb = Emprego.objects.get(pk=signin)
+        userdb.empregos.add(empregodb)
+
+        for emprego in userdb.empregos:
+            print(emprego.nome)
+
+        userdb.save()
+        return redirect('emprego-list')

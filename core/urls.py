@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^deleteEmprego/(?P<pk>\d+)/$', views.EmpregoDelete.as_view(), name='emprego-delete'),
     url(r'^viewEmprego/(?P<pk>\d+)/$', views.EmpregoDetailView.as_view(), name='emprego-detail'),
     url(r'^listEmprego/$', views.EmpregoListView, name='emprego-list'),
+    url(r'^signinEmprego/(?P<signin>\d+)/$', views.signinEmprego, name="signin-emprego"),
 
     # Urls Usuario
     url(r'^registrar/$', views.register, name='registrar'),

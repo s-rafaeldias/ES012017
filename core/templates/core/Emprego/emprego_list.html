@@ -23,6 +23,7 @@
                 <th>Área de atuação</th>
                 <th>Jornada de trabalho</th>
                 <th>Salário</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,11 @@
                 <td>{{emprego.area_atuacao}}</td>
                 <td>{{emprego.jornada_trabalho}}</td>
                 <td>{{emprego.salario}}</td>
+                <td>
+                    <a href="{% url 'emprego-detail' pk=emprego.id %}" title="Visualizar">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

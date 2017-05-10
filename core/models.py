@@ -44,3 +44,4 @@ class User(AbstractUser):
     perfil = models.CharField(max_length=1, choices=USER_TYPE)
     telefone = models.CharField(max_length=45, blank=True, null=True)
     endereco = models.CharField(max_length=120)
+    empregos = models.ManyToManyField(Emprego)
