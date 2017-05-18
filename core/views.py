@@ -14,7 +14,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from models import Emprego, User
+from models import Freela, User
 
 
 class IndexView(generic.ListView):
@@ -24,69 +24,60 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return #vai retornar algum objeto para ser listado caso precise
 
-# Views da Model Emprego
-class EmpregoCreate(CreateView):
-  model  = Emprego
-  template_name = 'core/Emprego/emprego_form.html'
+# Views da Model Freela
+class FreelaCreate(CreateView):
+  model  = Freela
+  template_name = 'core/Freela/freela_form.html'
   fields = ['nome',
             'descricao',
-            'empresa',
-            'area_atuacao',
             'local_trabalho',
-            'quantidade_vagas',
             'jornada_trabalho',
-            'salario',
-            'atribuicoes',
+            'remuneracao',
             'status']
   success_url = reverse_lazy('index')
 
 
-class EmpregoUpdate(UpdateView):
-  model = Emprego
+class FreelaUpdate(UpdateView):
+  model = Freela
   fields = ['nome',
             'descricao',
-            'empresa',
-            'area_atuacao',
             'local_trabalho',
-            'quantidade_vagas',
             'jornada_trabalho',
-            'salario',
-            'atribuicoes',
+            'remuneracao',
             'status']
   success_url = reverse_lazy('index')
 
 
-class EmpregoDelete(DeleteView):
-  model = Emprego
+class FreelaDelete(DeleteView):
+  model = Freela
   success_url = reverse_lazy('index')
 
 
-class EmpregoDetailView(DetailView):
-  model = Emprego
-  template_name = 'core/Emprego/emprego_detail.html'
+class FreelaDetailView(DetailView):
+  model = Freela
+  template_name = 'core/Freela/freela_detail.html'
 
   def get_context_data(self, **kwargs):
-    context = super(EmpregoDetailView, self).get_context_data(**kwargs)
-    context['inscrito'] = User.objects.filter(empregos__id=kwargs['object'].id).count()
+    context = super(FreelaDetailView, self).get_context_data(**kwargs)
+    context['inscrito'] = User.objects.filter(freela=kwargs['object'].id).count()
     return context
 
 
-def EmpregoListView(request):
-    queryset_list = Emprego.objects.all()
+def FreelaListView(request):
+    queryset_list = Freela.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
         Q(nome__search = query)|
         Q(descricao__search=query)|
-        Q(empresa__search=query)|
         Q(area_atuacao__search=query) |
-        Q(salario__contains=query)
+        Q(remuneracao__contains=query)
         ).distinct()
 
     context = {
-        "emprego": queryset_list
+        "freela": queryset_list
     }
-    return render(request, "core/Emprego/emprego_list.html", context)
+    return render(request, "core/Freela/freela_list.html", context)
 
 
 def register(request):
@@ -123,10 +114,8 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
                   'first_name',
                   'last_name',
                   'email',
-                  'cpf',
-                  'cnpj',
+                  'cpf_cnpj',
                   'genero',
-                  'perfil',
                   'telefone',
                   'endereco',
                   'descricao']
@@ -153,18 +142,19 @@ def change_password(request):
             args = {'form': form}
             return render(request, 'core/Usuario/change_password.html', args)
 
-def signinEmprego(request, signin):
+
+def signin_freela(request, signin):
     user = request.user
 
     if user.is_anonymous:
         return redirect('/login')
     else:
         userdb = User.objects.get(pk=user.id)
-        empregodb = Emprego.objects.get(pk=signin)
-        userdb.empregos.add(empregodb)
+        freeladb = Freela.objects.get(pk=signin)
+        userdb.freelas.add(freeladb)
 
-        for emprego in userdb.empregos:
-            print(emprego.nome)
+        for freela in userdb.freela:
+            print(freela.nome)
 
         userdb.save()
-        return redirect('emprego-list')
+        return redirect('freela-list')

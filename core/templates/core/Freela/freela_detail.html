@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Inscrever para Freela</h1>
+            <div class = "panel panel-primary">
+                <div class = "panel-heading">
+                    <h4 class = "panel-title">Freela</h4>
+                </div>
+            <div class = "panel-body">
+                <div href = "#" class = "list-group-item">
+
+                    <p>Nome: {{ freela.nome }}</p>
+                    <hr class="head-border">
+                    <p>Descrição: {{ freela.descricao }}</p>
+                    <hr class="head-border">
+                    <p>Local de trabalho: {{ freela.local_trabalho }}</p>
+                    <hr class="head-border">
+                    <p>Jornada de trabalho: {{ freela.jornada_trabalho }}</p>
+                    <hr class="head-border">
+                    <p>Remuneração: {{ freela.remuneracao }}</p>
+                </div>
+            </div>
+            </div>
+
+
+        {% if not inscrito %}
+
+            <a href="{% url 'signin-freela' signin=freela.id %}" class="btn btn-default btn-lg">Inscrever</a>
+
+        {% endif %}
+
+    </div>
+{% endblock %}

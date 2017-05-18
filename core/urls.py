@@ -5,13 +5,13 @@ from django.contrib.auth.views import login, logout
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    # Urls Emprego
-    url(r'^newEmprego/$', views.EmpregoCreate.as_view(), name='emprego-create'),
-    url(r'^editEmprego/(?P<pk>\d+)/$', views.EmpregoUpdate.as_view(), name='emprego-update'),
-    url(r'^deleteEmprego/(?P<pk>\d+)/$', views.EmpregoDelete.as_view(), name='emprego-delete'),
-    url(r'^viewEmprego/(?P<pk>\d+)/$', views.EmpregoDetailView.as_view(), name='emprego-detail'),
-    url(r'^listEmprego/$', views.EmpregoListView, name='emprego-list'),
-    url(r'^signinEmprego/(?P<signin>\d+)/$', views.signinEmprego, name="signin-emprego"),
+    # Urls Freela
+    url(r'^newFreela/$', views.FreelaCreate.as_view(), name='freela-create'),
+    url(r'^editFreela/(?P<pk>\d+)/$', views.FreelaUpdate.as_view(), name='freela-update'),
+    url(r'^deleteFreela/(?P<pk>\d+)/$', views.FreelaDelete.as_view(), name='freela-delete'),
+    url(r'^viewFreela/(?P<pk>\d+)/$', views.FreelaDetailView.as_view(), name='freela-detail'),
+    url(r'^listFreela/$', views.FreelaListView, name='freela-list'),
+    url(r'^signinFreela/(?P<signin>\d+)/$', views.signin_freela, name="signin-freela"),
 
     # Urls Usuario
     url(r'^registrar/$', views.register, name='registrar'),

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-    <h1>Lista de Empregos</h1>
+    <h1>Lista de Freelas</h1>
     <form method="get" action="">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
@@ -19,24 +19,22 @@
             <tr>
                 <th>Nome</th>
                 <th>Descrição</th>
-                <th>Empresa</th>
-                <th>Área de atuação</th>
+                <th>Local de trabalho</th>
                 <th>Jornada de trabalho</th>
-                <th>Salário</th>
+                <th>Remuneração</th>
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            {% for emprego in emprego %}
+            {% for freela in freela %}
             <tr>
-                <td>{{emprego.nome}}</td>
-                <td>{{emprego.descricao}}</td>
-                <td>{{emprego.empresa}}</td>
-                <td>{{emprego.area_atuacao}}</td>
-                <td>{{emprego.jornada_trabalho}}</td>
-                <td>{{emprego.salario}}</td>
+                <td>{{freela.nome}}</td>
+                <td>{{freela.descricao}}</td>
+                <td>{{ freela.local_trabalho }}</td>
+                <td>{{freela.jornada_trabalho}}</td>
+                <td>{{freela.remuneracao}}</td>
                 <td>
-                    <a href="{% url 'emprego-detail' pk=emprego.id %}" title="Visualizar">
+                    <a href="{% url 'freela-detail' pk=freela.id %}" title="Visualizar">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
                 </td>

@@ -38,7 +38,7 @@
                             <a href="{% url 'login' %}">Login</a>
                         </li>
                         <li>
-                            <a href="{% url 'emprego-list' %}">Trabalhos</a>
+                            <a href="{% url 'freela-list' %}">Trabalhos</a>
                         </li>
                     {% endif %}
                     {% if user.is_authenticated == True%}
@@ -46,7 +46,7 @@
                             <a href="{% url 'perfil' %}">Perfil</a>
                         </li>
                         <li>
-                            <a href="{% url 'emprego-list' %}">Trabalhos</a>
+                            <a href="{% url 'freela-list' %}">Trabalhos</a>
                         </li>
                         <li>
                             <a href="{% url 'logout' %}">Logout</a>

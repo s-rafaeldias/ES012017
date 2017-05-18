@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 from core import models
-from models import Emprego, User
+from models import Freela, User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-class EmpregoForm(forms.ModelForm):
+
+class FreelaForm(forms.ModelForm):
     class Meta:
-        model = Emprego
+        model = Freela
         fields = ['nome',
                   'descricao',
-                  'empresa',
-                  'area_atuacao',
                   'local_trabalho',
-                  'quantidade_vagas',
                   'jornada_trabalho',
-                  'salario',
-                  'atribuicoes',
+                  'remuneracao',
                   'status']
 
 
@@ -28,10 +25,8 @@ class RegistrationForm(UserCreationForm):
                   'email',
                   'password1',
                   'password2',
-                  'cpf',
-                  'cnpj',
+                  'cpf_cnpj',
                   'genero',
-                  'perfil',
                   'telefone',
                   'endereco',
                   'descricao']
