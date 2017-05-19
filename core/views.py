@@ -59,7 +59,8 @@ class FreelaDetailView(DetailView):
 
   def get_context_data(self, **kwargs):
     context = super(FreelaDetailView, self).get_context_data(**kwargs)
-    context['inscrito'] = User.objects.filter(freela=kwargs['object'].id).count()
+    user = self.request.user
+    context['inscrito'] = User.objects.filter(freela=kwargs['object'].id, id=user.id).count()
     return context
 
 
@@ -151,10 +152,7 @@ def signin_freela(request, signin):
     else:
         userdb = User.objects.get(pk=user.id)
         freeladb = Freela.objects.get(pk=signin)
-        userdb.freelas.add(freeladb)
-
-        for freela in userdb.freela:
-            print(freela.nome)
+        userdb.freela.add(freeladb)
 
         userdb.save()
         return redirect('freela-list')
