@@ -71,7 +71,7 @@ def FreelaListView(request):
         queryset_list = queryset_list.filter(
         Q(nome__search = query)|
         Q(descricao__search=query)|
-        Q(area_atuacao__search=query) |
+        Q(local_trabalho__search=query) |
         Q(remuneracao__contains=query)
         ).distinct()
 
