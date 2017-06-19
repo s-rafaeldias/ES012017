@@ -71,6 +71,3 @@ class EmpregoListView(ListView):
 
   def get_queryset(self):
     return Emprego.objects.all()
-
-
-
