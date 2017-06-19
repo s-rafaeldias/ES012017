@@ -8,7 +8,7 @@
 + Rafael Dias Silveira - 14/0030433
 
 ## Projeto
- (editar) O Work4holics é m sistema projetado para conectar empresas que buscam futuros empregados e pessoas físicas que estejam em busca de um emprego.
+ (editar) O Work4holics é m sistema projetado para conectar pessoas que procuram freelancers e pessoas que ofertar freelas(modificar)
  
 ## Arquitetura do Projeto
 

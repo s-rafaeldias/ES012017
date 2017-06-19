@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -100,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'core.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -120,6 +122,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '../'
 
 # Heroku Settings
 import dj_database_url
@@ -132,9 +136,9 @@ ALLOWED_HOSTS = ['*']
 DEBUG = False
 
 try:
-    from .local_settings import *
+   from .local_settings import *
 except ImportError:
-    pass
+   pass
 
 # Update database configuration with $DATABASE_URL.
 import dj_database_url

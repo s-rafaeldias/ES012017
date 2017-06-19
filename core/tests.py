@@ -1,21 +1,17 @@
 from django.test import TestCase
 
 # Create your tests here.
-from models import Emprego
+from models import Freela
 
-def criar_emprego():
-    emprego = Emprego.objects.create(nome='Teste',
+
+def teste_para_criacao_de_freelas():
+    freela = Freela.objects.create(nome='Teste',
                                      descricao='Teste',
-                                     empresa='Teste',
                                      area_atuacao='Teste',
                                      local_trabalho='Teste',
-                                     quantidade_vagas=10,
                                      jornada_trabalho=8,
-                                     salario=10.00,
-                                     atribuicoes='Teste, teste etes',
+                                     remuneracao=10.00,
                                      status=True)
 
-    return emprego
+    return freela
 
-
-#class EmpregoViewTest(TestCase):
