@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from core import models
-from models import Freela, User
+from .models import Freela, User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 

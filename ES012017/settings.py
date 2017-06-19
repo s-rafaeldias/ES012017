@@ -124,6 +124,7 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '../'
+
 # Heroku Settings
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()

@@ -14,7 +14,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from models import Freela, User
+from .models import Freela, User
 
 
 class IndexView(generic.ListView):
