@@ -32,4 +32,4 @@ class User(AbstractUser):
     genero = models.CharField(max_length=1, blank=True, null=True, choices=GENRE_CHOICES)
     telefone = models.CharField(max_length=45, blank=True, null=True)
     endereco = models.CharField(max_length=120)
-    projeto = models.ManyToManyField(Projeto)
+    projeto = models.ManyToManyField(Projeto, blank=True)
