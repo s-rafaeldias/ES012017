@@ -106,7 +106,7 @@ def UserListView(request):
             Q(last_name__search=query) |
             Q(descricao__icontains=query) |
             Q(email__contains=query) |
-            Q(cpf_cnpj__search=query)
+            Q(cpf__search=query)
         ).distinct()
 
     context = {
@@ -132,7 +132,7 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
               'first_name',
               'last_name',
               'email',
-              'cpf_cnpj',
+              'cpf',
               'genero',
               'telefone',
               'endereco',
