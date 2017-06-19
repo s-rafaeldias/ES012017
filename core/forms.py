@@ -5,13 +5,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
-class FreelaForm(forms.ModelForm):
+class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Freela
         fields = ['nome',
                   'descricao',
                   'local_trabalho',
-                  'jornada_trabalho',
+                  'duracao',
                   'remuneracao',
                   'status']
 

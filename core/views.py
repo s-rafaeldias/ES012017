@@ -14,7 +14,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from .models import Freela, User
+from .models import Projeto, User
 
 
 class IndexView(generic.ListView):
@@ -24,48 +24,48 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return #vai retornar algum objeto para ser listado caso precise
 
-# Views da Model Freela
-class FreelaCreate(CreateView):
-  model  = Freela
-  template_name = 'core/Freela/freela_form.html'
+# Views da Model Projeto
+class ProjetoCreate(CreateView):
+  model  = Projeto
+  template_name = 'core/Projeto/freela_form.html'
   fields = ['nome',
             'descricao',
             'local_trabalho',
-            'jornada_trabalho',
+            'duracao',
             'remuneracao',
             'status']
   success_url = reverse_lazy('index')
 
 
-class FreelaUpdate(UpdateView):
-  model = Freela
+class ProjetoUpdate(UpdateView):
+  model = Projeto
   fields = ['nome',
             'descricao',
             'local_trabalho',
-            'jornada_trabalho',
+            'duracao',
             'remuneracao',
             'status']
   success_url = reverse_lazy('index')
 
 
-class FreelaDelete(DeleteView):
-  model = Freela
+class ProjetoDelete(DeleteView):
+  model = Projeto
   success_url = reverse_lazy('index')
 
 
-class FreelaDetailView(DetailView):
-  model = Freela
-  template_name = 'core/Freela/freela_detail.html'
+class ProjetoDetailView(DetailView):
+  model = Projeto
+  template_name = 'core/Projeto/freela_detail.html'
 
   def get_context_data(self, **kwargs):
-    context = super(FreelaDetailView, self).get_context_data(**kwargs)
+    context = super(ProjetoDetailView, self).get_context_data(**kwargs)
     user = self.request.user
     context['inscrito'] = User.objects.filter(freela=kwargs['object'].id, id=user.id).count()
     return context
 
 
-def FreelaListView(request):
-    queryset_list = Freela.objects.all()
+def ProjetoListView(request):
+    queryset_list = Projeto.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -78,7 +78,7 @@ def FreelaListView(request):
     context = {
         "freela": queryset_list
     }
-    return render(request, "core/Freela/freela_list.html", context)
+    return render(request, "core/Projeto/freela_list.html", context)
 
 
 def register(request):
@@ -172,7 +172,7 @@ def signin_freela(request, signin):
         return redirect('/login')
     else:
         userdb = User.objects.get(pk=user.id)
-        freeladb = Freela.objects.get(pk=signin)
+        freeladb = Projeto.objects.get(pk=signin)
         userdb.freela.add(freeladb)
 
         userdb.save()

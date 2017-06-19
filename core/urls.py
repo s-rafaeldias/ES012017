@@ -5,13 +5,13 @@ from django.contrib.auth.views import login, logout
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    # Urls Freela
-    url(r'^newFreela/$', views.FreelaCreate.as_view(), name='freela-create'),
-    url(r'^editFreela/(?P<pk>\d+)/$', views.FreelaUpdate.as_view(), name='freela-update'),
-    url(r'^deleteFreela/(?P<pk>\d+)/$', views.FreelaDelete.as_view(), name='freela-delete'),
-    url(r'^viewFreela/(?P<pk>\d+)/$', views.FreelaDetailView.as_view(), name='freela-detail'),
-    url(r'^listFreela/$', views.FreelaListView, name='freela-list'),
-    url(r'^signinFreela/(?P<signin>\d+)/$', views.signin_freela, name="signin-freela"),
+    # Urls Projeto
+    url(r'^newProjeto/$', views.ProjetoCreate.as_view(), name='projeto-create'),
+    url(r'^editProjeto/(?P<pk>\d+)/$', views.ProjetoUpdate.as_view(), name='projeto-update'),
+    url(r'^deleteProjeto/(?P<pk>\d+)/$', views.ProjetoDelete.as_view(), name='projeto-delete'),
+    url(r'^viewProjeto/(?P<pk>\d+)/$', views.ProjetoDetailView.as_view(), name='projeto-detail'),
+    url(r'^listProjeto/$', views.ProjetoListView, name='projeto-list'),
+    url(r'^signinProjeto/(?P<signin>\d+)/$', views.signin_projeto, name="signin-projeto"),
 
     # Urls Usuario
     url(r'^registrar/$', views.register, name='registrar'),
