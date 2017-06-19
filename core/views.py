@@ -97,13 +97,30 @@ def register(request):
         return render(request, 'core/Usuario/register.html', args)
 
 
-def view_profile(request):
-    args = {'user': request.user}
-    user = request.user
+def UserListView(request):
+    queryset_list = User.objects.filter(is_superuser=False).order_by("id")
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(first_name__search=query) |
+            Q(last_name__search=query) |
+            Q(descricao__icontains=query) |
+            Q(email__contains=query) |
+            Q(cpf_cnpj__search=query)
+        ).distinct()
+
+    context = {
+        "user": queryset_list
+    }
+    return render(request, "core/Usuario/user_list.html", context)
+
+
+def view_profile(request,pk):
+    user = User.objects.get(pk=pk)
     if user.is_anonymous:
         return redirect('/login')
     else:
-        return render(request, 'core/Usuario/perfil.html', args)
+        return render(request, 'core/Usuario/perfil.html', {"user":user})
 
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
@@ -112,17 +129,20 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'core/Usuario/edit_profile.html'
     model = User
     fields = ['username',
-                  'first_name',
-                  'last_name',
-                  'email',
-                  'cpf_cnpj',
-                  'genero',
-                  'telefone',
-                  'endereco',
-                  'descricao']
+              'first_name',
+              'last_name',
+              'email',
+              'cpf_cnpj',
+              'genero',
+              'telefone',
+              'endereco',
+              'descricao']
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('perfil', args=(self.object.id,))
 
 
 def change_password(request):
@@ -131,13 +151,14 @@ def change_password(request):
         return redirect('/login')
     else:
         if request.method == 'POST':
-            form = PasswordChangeForm(data=request.POST, user=request.user)
+            form = PasswordChangeForm(request.user, request.POST)
             if form.is_valid():
-                form.save()
-                update_session_auth_hash(request, form.user)
-                return redirect('/perfil')
+                user = form.save()
+                update_session_auth_hash(request, user)
+                return render(request, 'core/Usuario/perfil.html', {"user":user})
             else:
-                return redirect('/editSenha')
+                return redirect('/editSenha', {"user":user})
+
         else:
             form = PasswordChangeForm(user=request.user)
             args = {'form': form}

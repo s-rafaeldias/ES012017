@@ -30,7 +30,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    {% if user.is_authenticated == False %}
+                    {% if request.user.is_authenticated == False %}
                         <li>
                             <a href="{% url 'registrar' %}">Registrar</a>
                         </li>
@@ -41,9 +41,12 @@
                             <a href="{% url 'freela-list' %}">Trabalhos</a>
                         </li>
                     {% endif %}
-                    {% if user.is_authenticated == True%}
+                    {% if request.user.is_authenticated == True%}
                         <li>
-                            <a href="{% url 'perfil' %}">Perfil</a>
+                            <a href="{% url 'perfil' pk=request.user.id %}">Perfil</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'user-list' %}">Freelancers</a>
                         </li>
                         <li>
                             <a href="{% url 'freela-list' %}">Trabalhos</a>

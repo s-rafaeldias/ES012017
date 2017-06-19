@@ -15,10 +15,11 @@ urlpatterns = [
 
     # Urls Usuario
     url(r'^registrar/$', views.register, name='registrar'),
+    url(r'^listUser/$', views.UserListView, name='user-list'),
     url(r'^login/$', login,{'template_name': 'core/Usuario/login.html'}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
-    url(r'^perfil/$', views.view_profile, name='perfil'),
-    url(r'^editPerfil/$', views.UserUpdate.as_view(success_url='/perfil'), name='perfil-editar'),
+    url(r'^perfil/(?P<pk>\d+)$', views.view_profile, name='perfil'),
+    url(r'^editPerfil/(?P<pk>\d+)$', views.UserUpdate.as_view(), name='perfil-editar'),
     url(r'^editSenha/$', views.change_password, name='senha-editar'),
 
 ]
