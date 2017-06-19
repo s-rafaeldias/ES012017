@@ -26,15 +26,15 @@
             </tr>
         </thead>
         <tbody>
-            {% for freela in freela %}
+            {% for projeto in projeto %}
             <tr>
-                <td>{{freela.nome}}</td>
-                <td>{{freela.descricao}}</td>
-                <td>{{ freela.local_trabalho }}</td>
-                <td>{{freela.jornada_trabalho}}</td>
-                <td>{{freela.remuneracao}}</td>
+                <td>{{projeto.nome}}</td>
+                <td>{{projeto.descricao}}</td>
+                <td>{{ projeto.local_trabalho }}</td>
+                <td>{{projeto.duracao}}</td>
+                <td>{{projeto.remuneracao}}</td>
                 <td>
-                    <a href="{% url 'freela-detail' pk=freela.id %}" title="Visualizar">
+                    <a href="{% url 'projeto-detail' pk=projeto.id %}" title="Visualizar">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
                 </td>
@@ -42,6 +42,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'freela-create' %}" class="btn btn-default btn-lg">Criar oferta de freela</a>
+    <a href="{% url 'projeto-create' %}" class="btn btn-default btn-lg">Criar oferta de projeto</a>
     </div>
 {% endblock content %}

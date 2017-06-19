@@ -27,7 +27,7 @@ class IndexView(generic.ListView):
 # Views da Model Projeto
 class ProjetoCreate(CreateView):
   model  = Projeto
-  template_name = 'core/Projeto/freela_form.html'
+  template_name = 'core/Projeto/projeto_form.html'
   fields = ['nome',
             'descricao',
             'local_trabalho',
@@ -55,12 +55,12 @@ class ProjetoDelete(DeleteView):
 
 class ProjetoDetailView(DetailView):
   model = Projeto
-  template_name = 'core/Projeto/freela_detail.html'
+  template_name = 'core/Projeto/projeto_detail.html'
 
   def get_context_data(self, **kwargs):
     context = super(ProjetoDetailView, self).get_context_data(**kwargs)
     user = self.request.user
-    context['inscrito'] = User.objects.filter(freela=kwargs['object'].id, id=user.id).count()
+    context['inscrito'] = User.objects.filter(projeto=kwargs['object'].id, id=user.id).count()
     return context
 
 
@@ -76,9 +76,9 @@ def ProjetoListView(request):
         ).distinct()
 
     context = {
-        "freela": queryset_list
+        "projeto": queryset_list
     }
-    return render(request, "core/Projeto/freela_list.html", context)
+    return render(request, "core/Projeto/projeto_list.html", context)
 
 
 def register(request):
@@ -165,15 +165,15 @@ def change_password(request):
             return render(request, 'core/Usuario/change_password.html', args)
 
 
-def signin_freela(request, signin):
+def signin_projeto(request, signin):
     user = request.user
 
     if user.is_anonymous:
         return redirect('/login')
     else:
         userdb = User.objects.get(pk=user.id)
-        freeladb = Projeto.objects.get(pk=signin)
-        userdb.freela.add(freeladb)
+        projetodb = Projeto.objects.get(pk=signin)
+        userdb.projeto.add(projetodb)
 
         userdb.save()
-        return redirect('freela-list')
+        return redirect('projeto-list')

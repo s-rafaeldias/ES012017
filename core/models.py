@@ -10,7 +10,7 @@ class Projeto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=250)
     local_trabalho = models.CharField(max_length=100)
-    jornada_trabalho = models.PositiveIntegerField()
+    duracao = models.PositiveIntegerField()
     remuneracao = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.BooleanField()
 

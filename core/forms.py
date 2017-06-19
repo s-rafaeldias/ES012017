@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from core import models
-from .models import Freela, User
+from .models import Projeto, User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 class ProjetoForm(forms.ModelForm):
     class Meta:
-        model = Freela
+        model = Projeto
         fields = ['nome',
                   'descricao',
                   'local_trabalho',
