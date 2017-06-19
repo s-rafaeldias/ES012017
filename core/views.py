@@ -91,6 +91,8 @@ def register(request):
                                     )
             login(request, user)
             return HttpResponseRedirect('/')
+        else:
+            return redirect('/register')
     else:
         form = RegistrationForm()
         args = {'form': form}
