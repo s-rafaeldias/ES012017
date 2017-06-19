@@ -25,7 +25,7 @@ class RegistrationForm(UserCreationForm):
                   'email',
                   'password1',
                   'password2',
-                  'cpf_cnpj',
+                  'cpf',
                   'genero',
                   'telefone',
                   'endereco',
