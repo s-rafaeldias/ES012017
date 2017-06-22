@@ -37,14 +37,6 @@ class ProjetoCreate(CreateView):
             'status']
   success_url = reverse_lazy('index')
 
-class PropostaUserCreate(CreateView):
-    model = PropostaUser
-    template_name = 'core/PropostaUser/proposta_user_form.html'
-    fields = ['from_user',
-             'to_user',
-             'dsc_proposta']
-    success_url = reverse_lazy('index')
-
 class ProjetoUpdate(UpdateView):
   model = Projeto
   fields = ['nome',
@@ -187,3 +179,11 @@ def signin_projeto(request, signin):
 
         userdb.save()
         return redirect('projeto-list')
+
+class PropostaUserCreate(CreateView):
+    model = PropostaUser
+    template_name = 'core/PropostaUser/proposta_user_form.html'
+    fields = ['from_user',
+             'to_user',
+             'dsc_proposta']
+    success_url = reverse_lazy('index')

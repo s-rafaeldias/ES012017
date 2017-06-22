@@ -15,11 +15,6 @@ class ProjetoForm(forms.ModelForm):
                   'remuneracao',
                   'status']
 
-class PropostaUser(forms.ModelForm):
-    model = PropostaUser
-    fields = ['from_user',
-              'to_user',
-              'dsc_proposta']
 
 class RegistrationForm(UserCreationForm):
     class Meta:
@@ -46,3 +41,9 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
         return user
+
+class PropostaUser(forms.ModelForm):
+    model = PropostaUser
+    fields = ['from_user',
+              'to_user',
+              'dsc_proposta']
