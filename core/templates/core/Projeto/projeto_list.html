@@ -1,6 +1,15 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
+    <style>
+
+        ul li:hover.hover-de-lista {
+            background: #4ab8b3;
+        }
+
+    </style>
+
     <div class="container">
     <h1>Lista de Freelas</h1>
     <form method="get" action="">
@@ -14,34 +23,77 @@
         </div>
     </form>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Local de trabalho</th>
-                <th>Jornada de trabalho</th>
-                <th>Remuneração</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for projeto in projeto %}
-            <tr>
-                <td>{{projeto.nome}}</td>
-                <td>{{projeto.descricao}}</td>
-                <td>{{ projeto.local_trabalho }}</td>
-                <td>{{projeto.duracao}}</td>
-                <td>{{projeto.remuneracao}}</td>
-                <td>
-                    <a href="{% url 'projeto-detail' pk=projeto.id %}" title="Visualizar">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'projeto-create' %}" class="btn btn-default btn-lg">Criar oferta de projeto</a>
+{#    <table class="table table-hover">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Nome</th>#}
+{#                <th>Descrição</th>#}
+{#                <th>Local de trabalho</th>#}
+{#                <th>Jornada de trabalho</th>#}
+{#                <th>Remuneração</th>#}
+{#                <th>Ação</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for projeto in projeto %}#}
+{#            <tr>#}
+{#                <td>{{projeto.nome}}</td>#}
+{#                <td>{{projeto.descricao}}</td>#}
+{#                <td>{{ projeto.local_trabalho }}</td>#}
+{#                <td>{{projeto.duracao}}</td>#}
+{#                <td>{{projeto.remuneracao}}</td>#}
+{#                <td>#}
+{#                    <a href="{% url 'projeto-detail' pk=projeto.id %}" title="Visualizar">#}
+{#                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>#}
+{#                    </a>#}
+{#                </td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+    <br/>
+
+    <ul class="list-group">
+
+        {% for projeto in projeto %}
+
+            <li class="list-group-item hover-de-lista">
+
+                <a href="{% url 'projeto-detail' pk=projeto.id %}" style="color: inherit; text-decoration: none;">
+
+
+                    <h4>{{ projeto.nome }}</h4>
+
+                    <div class="row">
+
+                        <div class="col-md-10">
+
+                            <h6> Descrição do Projeto: </h6>
+
+                            <span class="secondary-text">{{ projeto.descricao }}</span>
+
+                        </div>
+
+
+                        <div class="col-md-2">
+
+                            <h6> Ofertado por: </h6>
+
+                            <span> Pessoa que criou o projeto</span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+{#    <a href="{% url 'projeto-create' %}" class="btn btn-default btn-lg">Criar oferta de projeto</a>#}
     </div>
 {% endblock content %}
