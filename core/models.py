@@ -18,6 +18,9 @@ class User(AbstractUser):
     telefone = models.CharField(max_length=45, blank=True, null=True)
     endereco = models.CharField(max_length=120)
     # projeto = models.ManyToManyField(Projeto, blank=True)
+    propostasUsers = models.ManyToManyField('self',
+                                            through='PropostaUser',
+                                            symmetrical=False)
 
 
 class Projeto(models.Model):
@@ -34,3 +37,14 @@ class Projeto(models.Model):
 
     def __unicode__(self):
         return self.nome
+
+class PropostaUser(models.Model):
+    dsc_proposta = models.CharField(max_length=1000)
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+
+    def __str__(self):
+        return self.id
+
+    def __unicode__(self):
+        return self.id

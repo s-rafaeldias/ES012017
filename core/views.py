@@ -14,7 +14,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from .models import Projeto, User
+from .models import Projeto, User, PropostaUser
 
 
 class IndexView(generic.ListView):
@@ -33,9 +33,17 @@ class ProjetoCreate(CreateView):
             'local_trabalho',
             'duracao',
             'remuneracao',
+            'user',
             'status']
   success_url = reverse_lazy('index')
 
+class PropostaUserCreate(CreateView):
+    model = PropostaUser
+    template_name = 'core/PropostaUser/proposta_user_form.html'
+    fields = ['from_user',
+             'to_user',
+             'dsc_proposta']
+    success_url = reverse_lazy('index')
 
 class ProjetoUpdate(UpdateView):
   model = Projeto
@@ -92,7 +100,7 @@ def register(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            return redirect('/register')
+            return redirect('/registrar')
     else:
         form = RegistrationForm()
         args = {'form': form}
