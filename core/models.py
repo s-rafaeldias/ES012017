@@ -6,21 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class Projeto(models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=250)
-    local_trabalho = models.CharField(max_length=100)
-    duracao = models.PositiveIntegerField()
-    remuneracao = models.DecimalField(max_digits=8, decimal_places=2)
-    status = models.BooleanField()
-
-    def __str__(self):
-        return self.nome
-
-    def __unicode__(self):
-        return self.nome
-
-
 class User(AbstractUser):
     GENRE_CHOICES = (
         ('M', 'Masculino'),
@@ -32,4 +17,20 @@ class User(AbstractUser):
     genero = models.CharField(max_length=1, blank=True, null=True, choices=GENRE_CHOICES)
     telefone = models.CharField(max_length=45, blank=True, null=True)
     endereco = models.CharField(max_length=120)
-    projeto = models.ManyToManyField(Projeto, blank=True)
+    # projeto = models.ManyToManyField(Projeto, blank=True)
+
+
+class Projeto(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=250)
+    local_trabalho = models.CharField(max_length=100)
+    duracao = models.PositiveIntegerField()
+    remuneracao = models.DecimalField(max_digits=8, decimal_places=2)
+    status = models.BooleanField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nome
+
+    def __unicode__(self):
+        return self.nome
