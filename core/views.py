@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.shortcuts import redirect, render
-from .forms import RegistrationForm
+from .forms import RegistrationForm, PropostaUserForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
 from .models import Projeto, User, PropostaUser
@@ -183,7 +183,9 @@ def signin_projeto(request, signin):
 class PropostaUserCreate(CreateView):
     model = PropostaUser
     template_name = 'core/PropostaUser/proposta_user_form.html'
-    fields = ['from_user',
-             'to_user',
-             'dsc_proposta']
+    fields = ['to_user', 'dsc_proposta']
     success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.from_user = self.request.user
+        return super(PropostaUserCreate, self).form_valid(form)

@@ -42,8 +42,9 @@ class RegistrationForm(UserCreationForm):
 
         return user
 
-class PropostaUser(forms.ModelForm):
-    model = PropostaUser
-    fields = ['from_user',
-              'to_user',
-              'dsc_proposta']
+class PropostaUserForm(forms.ModelForm):
+    class Meta:
+        model = PropostaUser
+        fields = ['from_user',
+                  'to_user',
+                  'dsc_proposta']
