@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^newProjeto/$', views.ProjetoCreate.as_view(), name='projeto-create'),
     url(r'^editProjeto/(?P<pk>\d+)/$', views.ProjetoUpdate.as_view(), name='projeto-update'),
     url(r'^deleteProjeto/(?P<pk>\d+)/$', views.ProjetoDelete.as_view(), name='projeto-delete'),
-    url(r'^viewProjeto/(?P<pk>\d+)/$', views.ProjetoDetailView.as_view(), name='projeto-detail'),
+    #url(r'^viewProjeto/(?P<pk>\d+)/$', views.ProjetoDetailView.as_view(), name='projeto-detail'),
     url(r'^listProjeto/$', views.ProjetoListView, name='projeto-list'),
     url(r'^signinProjeto/(?P<signin>\d+)/$', views.signin_projeto, name="signin-projeto"),
 
@@ -25,5 +25,7 @@ urlpatterns = [
     # Urls PropostaUser
     url(r'^propostaUser/$', views.PropostaUserCreate.as_view(), name='fazer-proposta-user'),
 
+    #Urls PropostaProjeto
+    url(r'^newPropostaProjeto/(?P<pk>\d+)$', views.PropostaProjetoCreate.as_view(), name='projeto-proposta-create')
 
 ]

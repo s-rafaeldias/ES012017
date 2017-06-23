@@ -31,6 +31,7 @@ class Projeto(models.Model):
     remuneracao = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.BooleanField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    propostas = models.ManyToManyField(User, through='PropostaProjeto', related_name = 'propostas')
 
     def __str__(self):
         return self.nome
@@ -42,6 +43,13 @@ class PropostaUser(models.Model):
     dsc_proposta = models.CharField(max_length=1000)
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
+
+class PropostaProjeto(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
+    oferta = models.DecimalField(max_digits=10, decimal_places=2)
+    tempo = models.PositiveIntegerField()
+    infos = models.CharField(max_length=500)
 
     def __str__(self):
         return self.id

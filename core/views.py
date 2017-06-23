@@ -14,7 +14,7 @@ from django.shortcuts import redirect, render
 from .forms import RegistrationForm, PropostaUserForm
 from django.contrib.auth.views import PasswordChangeForm
 # Import das models
-from .models import Projeto, User, PropostaUser
+from .models import Projeto, User, PropostaUser, PropostaProjeto
 
 
 class IndexView(generic.ListView):
@@ -189,3 +189,16 @@ class PropostaUserCreate(CreateView):
     def form_valid(self, form):
         form.instance.from_user = self.request.user
         return super(PropostaUserCreate, self).form_valid(form)
+
+class PropostaProjetoCreate(CreateView):
+    model = PropostaProjeto
+    template_name = 'core/PropostaProjeto/proposta_projeto_form.html'
+    fields = ['oferta',
+            'tempo',
+            'infos']
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.projeto = Projeto.objects.get(pk=self.kwargs.get('pk'))
+        return super(PropostaProjetoCreate, self).form_valid(form)
