@@ -1,18 +1,18 @@
 from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.contrib.auth.views import PasswordChangeForm
+from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
-
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
 
 # Create your views here.
 from django.views import generic
-from django.core.urlresolvers import reverse_lazy
-
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import redirect, render
-from .forms import RegistrationForm, PropostaUserForm
-from django.contrib.auth.views import PasswordChangeForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from .forms import RegistrationForm
 # Import das models
 from .models import Projeto, User, PropostaUser, PropostaProjeto
 
@@ -202,3 +202,17 @@ class PropostaProjetoCreate(CreateView):
         form.instance.user = self.request.user
         form.instance.projeto = Projeto.objects.get(pk=self.kwargs.get('pk'))
         return super(PropostaProjetoCreate, self).form_valid(form)
+
+class UserPropostasList(ListView):
+    template_name = 'core/Usuario/user_offer_list.html'
+    model = PropostaUser
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super(UserPropostasList, self).get_context_data(**kwargs)
+        projetos = Projeto.objects.filter(user__id=user.id)
+        context['projects_offer_to_me'] = PropostaProjeto.objects.filter(projeto_id=projetos)
+        context['projects_offer_by_me'] = PropostaProjeto.objects.filter(user_id=user.id)
+        context['from_user'] = PropostaUser.objects.filter(from_user=user.id)
+        context['to_user']   = PropostaUser.objects.filter(to_user=user.id)
+        return context

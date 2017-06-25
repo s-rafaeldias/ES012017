@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^propostaUser/$', views.PropostaUserCreate.as_view(), name='fazer-proposta-user'),
 
     #Urls PropostaProjeto
-    url(r'^newPropostaProjeto/(?P<pk>\d+)$', views.PropostaProjetoCreate.as_view(), name='projeto-proposta-create')
+    url(r'^newPropostaProjeto/(?P<pk>\d+)$', views.PropostaProjetoCreate.as_view(), name='projeto-proposta-create'),
+
+    url(r'^listPropostas/', views.UserPropostasList.as_view(), name='list-user-offer'),
 
 ]

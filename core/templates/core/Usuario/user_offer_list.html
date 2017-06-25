@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">Propostas de projetos</div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Feitas por mim</div>
+                    <div class="panel-body">
+                        {% if projects_offer_by_me %}
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Nome do Projeto</th>
+                                    <th>Usuário da proposta</th>
+                                    <th>Oferta da proposta</th>
+                                    <th>Tempo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for offer in projects_offer_by_me %}
+                                    <tr>
+                                        <td>{{ offer.projeto.nome }}</td>
+                                        <td>{{ offer.user.username }}</td>
+                                        <td>{{ offer.oferta }}</td>
+                                        <td>{{ offer.tempo }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>Você ainda não fez propostas para outros projetos.</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Feitas para mim</div>
+                    <div class="panel-body">
+                        {% if projects_offer_to_me %}
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Nome do Projeto</th>
+                                    <th>Usuário da proposta</th>
+                                    <th>Oferta da proposta</th>
+                                    <th>Tempo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for offer in projects_offer_to_me %}
+                                    <tr>
+                                        <td>{{ offer.projeto.nome }}</td>
+                                        <td>{{ offer.user.username }}</td>
+                                        <td>{{ offer.oferta }}</td>
+                                        <td>{{ offer.tempo }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>Seus projetos não receberam nenhuma proposta ainda.</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">Propostas para usuários</div>
+            <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Feitas por mim</div>
+                    <div class="panel-body">
+                        {% if from_user %}
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Usuário da proposta</th>
+                                    <th>Descrição da proposta</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for offer in from_user %}
+                                    <tr>
+                                        <td>{{ offer.from_user.username }}</td>
+                                        <td>{{ offer.dsc_proposta }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>Você não fez nenhuma proposta ainda.</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Feitas para mim</div>
+                    <div class="panel-body">
+                        {% if to_user %}
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Usuário da proposta</th>
+                                    <th>Descrição da proposta</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for offer in to_user %}
+                                    <tr>
+                                        <td>{{ offer.from_user.username }}</td>
+                                        <td>{{ offer.dsc_proposta }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <span>Você não recebeu nenhuma proposta ainda.</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
