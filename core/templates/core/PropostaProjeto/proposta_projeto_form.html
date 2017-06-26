@@ -1,12 +1,38 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
 <div class="container">
-    <h1>Enviar Proposta de Projeto</h1>
-    <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-default btn-lg" type="submit">Enviar Proposta</button>
-    </form>
+    <h1>Inscrever para Projeto</h1>
+        <div class = "panel panel-primary">
+            <div class = "panel-heading">
+                <h4 class = "panel-title">Projeto</h4>
+            </div>
+        <div class = "panel-body">
+            <div href = "#" class = "list-group-item">
+
+                <p>Nome: {{ projeto.nome }}</p>
+                <hr class="head-border">
+                <p>Descrição: {{ projeto.descricao }}</p>
+                <hr class="head-border">
+                <p>Local de trabalho: {{ projeto.local_trabalho }}</p>
+                <hr class="head-border">
+                <p>Jornada de trabalho: {{ projeto.duraco }}</p>
+                <hr class="head-border">
+                <p>Remuneração: {{ projeto.remuneracao }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Enviar Proposta de Projeto</h1>
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-default btn-lg" type="submit">Enviar Proposta</button>
+        </form>
+    </div>
+
 </div>
+
 
 {% endblock %}

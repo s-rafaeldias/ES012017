@@ -1,16 +1,10 @@
 from django.test import TestCase
 
 # Create your tests here.
-from models import Projeto
+from .models import Projeto
 
+class CoreViewsTestCase(TestCase):
 
-def teste_para_criacao_de_projeto():
-    projeto = Projeto.objects.create(nome='Teste',
-                                     descricao='Teste',
-                                     area_atuacao='Teste',
-                                     local_trabalho='Teste',
-                                     duracao=8,
-                                     remuneracao=10.00,
-                                     status=True)
-
-    return projeto
+    def test_index(self):
+        resp = self.client.get('/')
+        self.assertEqual(resp.status_code, 200)
