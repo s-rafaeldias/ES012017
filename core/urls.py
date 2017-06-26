@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^editSenha/$', views.change_password, name='senha-editar'),
 
     # Urls PropostaUser
-    url(r'^propostaUser/$', views.PropostaUserCreate.as_view(), name='fazer-proposta-user'),
+    url(r'^propostaUser/(?P<pk>\d+)$', views.PropostaUserCreate.as_view(), name='fazer-proposta-user'),
 
     #Urls PropostaProjeto
     url(r'^newPropostaProjeto/(?P<pk>\d+)$', views.PropostaProjetoCreate.as_view(), name='projeto-proposta-create'),

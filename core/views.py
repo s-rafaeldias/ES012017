@@ -183,11 +183,17 @@ def signin_projeto(request, signin):
 class PropostaUserCreate(CreateView):
     model = PropostaUser
     template_name = 'core/PropostaUser/proposta_user_form.html'
-    fields = ['to_user', 'dsc_proposta']
+    fields = ['dsc_proposta']
     success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super(PropostaUserCreate, self).get_context_data(**kwargs)
+        context['user'] = User.objects.get(pk=self.kwargs.get('pk'))
+        return context
 
     def form_valid(self, form):
         form.instance.from_user = self.request.user
+        form.instance.to_user = User.objects.get(pk=self.kwargs.get('pk'))
         return super(PropostaUserCreate, self).form_valid(form)
 
 class PropostaProjetoCreate(CreateView):

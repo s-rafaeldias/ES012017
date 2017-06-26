@@ -1,6 +1,31 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
+<div class="container">
+    <div class = "panel panel-primary">
+        <div class = "panel-heading">
+            <h4 class = "panel-title">Perfil</h4>
+        </div>
+        <div class = "panel-body">
+            <div href = "#" class = "list-group-item">
+
+                <p>Nome: {{ user.first_name }} {{ user.last_name }}</p>
+                <hr class="head-border">
+                <p>Email: {{ user.email }}</p>
+                <hr class="head-border">
+                <p>Descrição: {{ user.descricao }}</p>
+                <hr class="head-border">
+                <p>Cpf: {{ user.cpf }}</p>
+                <hr class="head-border">
+                <p>Endereço: {{ user.endereco }}</p>
+                <hr class="head-border">
+                <p>Telefone: {{ user.telefone }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <h1>Fazer Proposta</h1>
     <form action="" method="post">{% csrf_token %}
