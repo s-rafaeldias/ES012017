@@ -35,6 +35,7 @@ class ProjetoCreate(CreateView):
             'remuneracao',
             'status']
   success_url = reverse_lazy('index')
+
   def form_valid(self, form):
       form.instance.user = self.request.user
       return super(ProjetoCreate, self).form_valid(form)

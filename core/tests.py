@@ -3,7 +3,7 @@ from django.contrib import auth
 
 
 # Create your tests here.
-from .models import Projeto, User, PropostaUser
+from .models import Projeto, User, PropostaUser, Projeto, PropostaProjeto
 
 class CoreViewsTestCase(TestCase):
 
@@ -25,8 +25,27 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(prop2.from_user_id, 1)
         self.assertEqual(prop2.to_user_id, 2)
 
+    def test_proposta_projeto_create(self):
 
-# class PropostaUserCreate(CreateView):
+        Projeto.objects.create( nome='ProjetoTeste',
+                                descricao='Dsc Projeto',
+                                local_trabalho='Local Trabalho Projeto',
+                                duracao=10,
+                                remuneracao=1000,
+                                status=True,
+                                user=User.objects.get(pk=1))
 
-# class PropostaProjetoCreate(CreateView):
-# class UserPropostasList(ListView):
+        user = User.objects.get(pk=1)
+        client = Client()
+        client.login(username=user.username, password='Br@197795')
+
+        url = '/newPropostaProjeto/%d' % Projeto.objects.get(nome='ProjetoTeste').id
+
+        resp = client.post(url, { 'oferta': 100,
+                                  'tempo': 100,
+                                  'infos': 'Testesss'}, follow=True)
+
+        self.assertEqual(resp.status_code, 200)
+
+        prop3 = PropostaProjeto.objects.count()
+        self.assertEqual(prop3, 1)
