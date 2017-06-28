@@ -46,8 +46,8 @@ class PropostaUser(models.Model):
 
 class PropostaProjeto(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     oferta = models.DecimalField(max_digits=10, decimal_places=2)
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     tempo = models.PositiveIntegerField()
     infos = models.CharField(max_length=500)
 
