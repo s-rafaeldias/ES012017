@@ -1,12 +1,47 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+
 <div class="container">
-    <h1>Fazer Proposta</h1>
-    <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-default btn-lg" type="submit">Fazer Proposta</button>
-    </form>
+    <div class = "panel panel-primary">
+        <div class = "panel-heading">
+            <h4 class = "panel-title">Perfil</h4>
+        </div>
+        <div class = "panel-body">
+            <div href = "#" class = "list-group-item">
+
+                <p>Nome: {{ user.first_name }} {{ user.last_name }}</p>
+                <hr class="head-border">
+                <p>Email: {{ user.email }}</p>
+                <hr class="head-border">
+                <p>Descrição: {{ user.descricao }}</p>
+                <hr class="head-border">
+                <p>Cpf: {{ user.cpf }}</p>
+                <hr class="head-border">
+                <p>Endereço: {{ user.endereco }}</p>
+                <hr class="head-border">
+                <p>Telefone: {{ user.telefone }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% if request.user == user %}
+        <a href="{% url 'perfil-editar' pk=request.user.id %}" class="btn btn-default btn-lg">Editar seu Perfil</a>
+        <a href="{% url 'senha-editar' %}" class="btn btn-default btn-lg">Editar sua Senha</a>
+    {% endif %}
+
+    {% if request.user != user %}
+    <div class="container">
+        <h1>Fazer Proposta</h1>
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-default btn-lg" type="submit">Fazer Proposta</button>
+        </form>
+    </div>
+    {% endif %}
+
 </div>
+
+
 
 {% endblock %}
