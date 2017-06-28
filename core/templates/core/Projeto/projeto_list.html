@@ -33,11 +33,13 @@
                 <td>{{ projeto.local_trabalho }}</td>
                 <td>{{projeto.duracao}}</td>
                 <td>{{projeto.remuneracao}}</td>
+                {% if user.is_authenticated %}
                 <td>
                     <a href="{% url 'projeto-proposta-create' pk=projeto.id %}" title="Visualizar">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </a>
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
